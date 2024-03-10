@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+<title>Calculator Example</title>
+</head>
+<body>
+<div>Result
+<span id="result"></span>
+</div>
+</body>
+<input type="number" name="n1" id="n1">
+<input type="number" name="n2" id="n2">
+<button onclick="getResults('add')">Add</button>
+<button onclick="getResults('subtract')">Subtract</button>
+<button onclick="getResults('multiply')">Multiply</button>
+<button onclick="getResults('divide')">Divide</button>
+<script>
+
+function getResults(operation){    
+let num1 = document.getElementById('n1').value;
+let num2 = document.getElementById('n2').value;
+
+fetch(`/calculator/${operation}?num1=${num1}&num2=${num2}`)
+.then(response => response.json())
+.then(data => {
+document.getElementById("result").innerHTML =
+data.result;
+})
+}
+
+</script>
+</html>
