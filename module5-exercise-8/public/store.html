@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--Template for creating and adding products to the website-->
+<template id="product-template">
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card">
+            <div class="card-header">Header</div> 
+            <img src="..." class="card-img-top" alt="..." >  
+            <div class="card-body">
+                <h5 class="card-title">Product-title</h5>
+                <div class="card-price"></div>
+                <p class="card-text">Product-Description</p>
+            </div>
+        </div>
+    </div>
+</template>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Website</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script src="https://kit.fontawesome.com/e4a40a2eda.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <!--Flex container for the webpage and to load the different sections-->
+    <div class="container p-3">
+        <h2>Fake Website</h2>
+        <!--div class to store all the filtering options in a organized manner-->
+        <div class="filters"> 
+            <!--Drop down menu for selecting categories-->
+            <select name="dropdown" id="dropdown" onchange="chooseCategory(event)">
+                <option value="default">All Products</option>
+                <option value="men's clothing">Men's</option>
+                <option value="women's clothing">Women's</option>
+                <option value="jewelery">Jewelry</option>
+                <option value="electronics">Electronics</option>
+            </select>
+
+                <!--Drop down for filtering search results by price or title-->
+                <label for="sorting">Sort By:
+                    <select name="order" id="order" onchange="sortProducts(event)">
+                        <option value="id">Default</option>
+                        <option value="price_hilow">Price (High to Low)</option>
+                        <option value="price_lowhi">Price (Low to High)</option>
+                        <option value="title_atoz">Title (A to Z)</option>
+                        <option value="title_ztoa">Title (Z to A)</option>
+                    </select>
+                </label>
+            
+            <div id="search">
+                <!--search for products-->
+                <input type="text" name="searchText" id="searchText"> 
+                <button onclick="searchProducts()">Search</button>
+            </div>
+
+        </div>    
+        <!--add each product to this div when loading to page-->
+        <div id="product-list" class="row g-5 py-5"></div>
+    </div>
+
+<!-- <script>
+    let allProducts;
+    //Fetch fake store data and call addproducts
+    fetch('https://fakestoreapi.com/products')
+    .then((response) => response.json())
+    .then((json) => { allProducts = json; json.forEach(element => addProduct(element))})
+
+    //add each product to a new card and load to page
+    function addProduct(product)
+    {
+        let template = document.getElementById('product-template').content.cloneNode(true);
+        template.querySelector('.card-header').innerHTML = categoryIcon(product.category) + ' ' + product.category;
+        template.querySelector('.card-title').innerText = product.title;
+        template.querySelector('.card-price').innerText =  `$${product.price}`;
+        template.querySelector('.card-img-top').src = product.image;
+        template.querySelector('.card-img-top').alt = product.title;
+        template.querySelector('.card-text').innerText = product.description;
+        document.querySelector('#product-list').appendChild(template);
+    }
+
+    //reload page after performing a filter
+    function loadFilteredProducts(products){
+        document.querySelector('#product-list').innerHTML = ''
+
+        products.forEach(product => {  addProduct(product); })
+
+    if(products.length == 0) document.querySelector('#product-list').innerHTML = 'No matching problems found'
+    }
+
+    //choose the category to display
+    function chooseCategory(e){
+        
+        let selectedCategory = e.target.value;
+        let filteredProduct = allProducts.filter(product => product.category == selectedCategory);
+        if (selectedCategory == 'default') filteredProduct =allProducts;
+        loadFilteredProducts(filteredProduct);
+    }
+
+    //sort the product based on price or title
+    function sortProducts(e){
+        let selectedOrder = e.target.value;
+        let sortedProducts = [...allProducts];
+
+        switch(selectedOrder) {
+            case 'price_lowhi': sortedProducts.sort((p1,p2) => p1.price - p2.price); break;
+            case 'price_hilow': sortedProducts.sort((p1,p2) => p2.price - p1.price); break;
+            case 'title_atoz' : sortedProducts.sort((p1,p2) => p1.title == p2.title ? 0 : (p1.title > p2.title ? 1 : -1)); break;
+            case 'title_ztoa' : sortedProducts.sort((p1,p2) => p2.title == p1.title ? 0 : (p2.title > p1.title ? 1 : -1)); break;
+        }
+        loadFilteredProducts(sortedProducts);
+    }
+
+    //search for products
+    function searchProducts(){
+        let searchText = document.getElementById('searchText').value.toLowerCase();
+        let filteredProducts = allProducts.filter(product => product.title.toLowerCase().indexOf(searchText) >= 0 ||
+        product.description.toLowerCase().indexOf(searchText)>= 0 || product.category.toLowerCase().indexOf(searchText) >= 0); 
+    
+        loadFilteredProducts(filteredProducts);
+    }
+    //add icons to each category heading
+    function categoryIcon(c){
+        switch(c.toLowerCase()){
+            case "men's clothing": return '<i class="fa-solid fa-shirt"></i>';
+            case "women's clothing": return '<i class="fa-solid fa-person-dress"></i>'
+            case "jewelery": return '<i class="fa-regular fa-gem"></i>';
+            case "electronics": return '<i class="fa-solid fa-plug"></i>'   
+        }
+        return '<i class="fa-brands fa-shirtsinbulk"></i>' ;
+    }
+</script>     -->
+<script src="./js/store.js"></script>
+</body>
+</html>

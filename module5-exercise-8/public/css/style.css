@@ -1,0 +1,19 @@
+
+.filters{
+    display: flex; justify-content: space-between;
+}
+.card-price{
+    text-align:right;
+}
+.card.mens_clothing .card-header{
+    background: lightblue;
+}
+.card.womens_clothing .card-header{
+    background: lightpink;
+}
+.card.jewelry .card-header{
+    background: lightgoldenrodyellow;
+}
+.card.electronics .card-header{
+    background: lightgrey;
+}
